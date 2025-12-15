@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "ime": "Adis",
+    "prezime": "Spahić",
+    "godine_staža": 5,
+    "pozicija": "Inžinjer"
+  },
+  {
+    "id": 2,
+    "ime": "John",
+    "prezime": "Smith",
+    "godine_staža": 15,
+    "pozicija": "CTO"
+  },
+  {
+    "id": 3,
+    "ime": "Marko",
+    "prezime": "Smith",
+    "godine_staža": 20,
+    "pozicija": "CTO"
+  },
+  {
+    "id": 4,
+    "ime": "Filip",
+    "prezime": "Car",
+    "godine_staža": 20,
+    "pozicija": "CEO"
+  }
+]
