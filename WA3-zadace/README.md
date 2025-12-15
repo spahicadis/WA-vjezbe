@@ -1,0 +1,3 @@
+Pokretanje aplikacije:
+
+Nakon kloniranja ili ručnog preuzimanja, navigirajte do direktorija gdje se nalazi i frontend i backend. Otvorite 2 terminala jedan za frontend i jedan za backend. Navigirajte sa svakim u jedan od direktorija. Provritite naredbu npm install u oba terminala. U terminalu gdje Vam se nalazi backend pokrenit npm start, a u terminalu frontenda npm run dev. U terminalu frontenda ćete imati URL Vue aplikacije, otvorite ga u pregledniku i pristupili ste aplikaciji. U slučaju da Vam je dokument bijeli, moguće da se radi o CORS problemu. Zaustavite frontend i backend, URL Vue aplikacije kopirajte i zalijepite ga u index.js file backend direktorija linija 12 nakon origin: ponovno pokrenite backend i frontend.
