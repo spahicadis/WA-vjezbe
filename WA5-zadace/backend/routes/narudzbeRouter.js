@@ -5,15 +5,19 @@ import { isOrderRequestValid } from "../helpers/validate.js";
 const narudzbeRouter = express.Router();
 
 narudzbeRouter.post("/", async (req, res) => {
-  const { narudzba, dostava } = req.body;
+  const { narucene_pizze } = req.body;
 
-  if (narudzba.length === 0 || !narudzba || !dostava) {
-    return res.status(400).json({ message: "Podatci za narudžbu neispravni" });
+  const validate = isOrderRequestValid(req.body);
+
+  if (!validate) {
+    return res
+      .status(400)
+      .json({ message: "Poslani podatci za narudžbu neispravni" }); //Generično radi jednostavnosti, mogao bi helper vraćati i specifičniji message
   }
 
   let total = 0;
 
-  for (const item of narudzba) {
+  for (const item of narucene_pizze) {
     try {
       const pizza = await db.collection("pizze").findOne({ naziv: item.naziv });
 
@@ -43,8 +47,7 @@ narudzbeRouter.post("/", async (req, res) => {
 
   try {
     const { insertedId } = await db.collection("narudzbe").insertOne({
-      ...dostava,
-      narucene_pizze: narudzba,
+      ...req.body,
       ukupna_cijena: total,
     });
     const data = await db.collection("narudzbe").findOne({ _id: insertedId });

@@ -80,7 +80,7 @@ const handleCreateOrder = async () => {
     }
   }
 
-  const response = await createNarudzba({ narudzba: cart.value, dostava: delivery.value })
+  const response = await createNarudzba({ ...delivery.value, narucene_pizze: cart.value })
 
   switch (response.status) {
     case 201: {

@@ -11,22 +11,22 @@ pizzeRouter.get("/", async (req, res) => {
   const sortQuery = {};
 
   if (naziv) {
-    query.naziv = { $regex: naziv, $options: "i" };
+    query.naziv = { $regex: naziv, $options: "i" }; //osigurano za djelomično podudaranje
   }
 
   if (cijena_min) {
-    query["cijene.mala"] = { $gt: Number(cijena_min) };
+    query["cijene.mala"] = { $gt: Number(cijena_min) }; //moj izbor logike za key, budući da je cijena više, avg od te 3 cijene pa po njemu usporedivati bi bilo najvise legit
   }
 
   if (cijena_max) {
-    query["cijene.jumbo"] = { $lt: Number(cijena_max) };
+    query["cijene.jumbo"] = { $lt: Number(cijena_max) }; //moj izbor logike za key, budući da je cijena više, avg od te 3 cijene pa po njemu usporedivati bi bilo najvise legit
   }
 
   if (Number(sort) === 1) {
-    sortQuery["cijene.mala"] = Number(sort); //asc
+    sortQuery["cijene.mala"] = Number(sort); //asc, moj izbor logike za key
   }
   if (Number(sort) === -1) {
-    sortQuery["cijene.jumbo"] = Number(sort); //desc
+    sortQuery["cijene.jumbo"] = Number(sort); //desc, moj izbor logike za key
   }
 
   try {
@@ -67,6 +67,13 @@ pizzeRouter.get("/:naziv", async (req, res) => {
 });
 
 pizzeRouter.post("/", async (req, res) => {
+  const validate = isPizzaRequestValid(req.body);
+
+  if (!validate) {
+    return res
+      .status(400)
+      .json({ message: "Poslani podatci za pizzu neispravni" }); //Generično radi jednostavnosti, mogao bi helper vraćati i specifičniji message
+  }
   try {
     const { insertedId } = await db.collection("pizze").insertOne(req.body);
     const data = await db.collection("pizze").findOne({ _id: insertedId });
