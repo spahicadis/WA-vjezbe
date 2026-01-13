@@ -4,7 +4,7 @@ export const isPizzaRequestValid = (data) => {
   }
   const request = data;
   const requestKeys = Object.keys(request);
-  const requiredKeys = ["naziv", "slika_url", "sastojci", "cijene"]; //provjeravam slika_url ali ne prikazujem na frontendu, frontend mi je isti iz WA3 samo je dodana filtering komponenta
+  const requiredKeys = ["naziv", "slika_url", "sastojci", "cijene"]; //provjeravam slika_url ali ne prikazujem na frontendu, frontend mi je isti iz WA3 samo je dodana filtering komponenta, cijene bi se isto mogle validirati odnosno formatirati u odgovarajuci format tako da mongo ne reze nule na kraju
   const requiredKeysOfSastojci = ["naziv", "url"];
   const checkRequiredKeys = requiredKeys.every((key) =>
     requestKeys.includes(key)
